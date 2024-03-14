@@ -2,7 +2,7 @@ import pandas as pd
 import random  
 
 # Read the table  
-df = pd.read_csv(r"c:\Users\c17527k\Documents\Volunteer\Usher Schedule v2.csv")  
+df = pd.read_csv(r"Usher Schedule v2.csv")  
 
 # Loop through the show columns and generate the volunteer pools  
 pools = {}  
