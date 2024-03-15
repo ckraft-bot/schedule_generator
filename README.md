@@ -29,6 +29,7 @@ __File Structure__: The script assumes a specific file structure and file paths 
 
 
 __Dependencies__:
+- Python 3.11.8
 - pandas: Used for data manipulation and analysis.
 - os: Used for file path operations.
 - datetime: Used for generating timestamps.
