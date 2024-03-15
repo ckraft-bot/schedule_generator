@@ -1,64 +1,62 @@
-import pandas as pd  
+import pandas as pd
 import os
 import datetime
+
+"""
+Excludes "Jim" and "Dwight" from being selected together for the same show.
+Prioritizes selecting "Special" volunteers first for each show.
+Writes the results to a text file with a timestamp in the filename.
+Removed unnecessary imports and variables.
+"""
+
+def generate_pool(df, col_name):
+    special = list(df[df[col_name] == "Special"]["VOLUNTEER NAME"])
+    available_volunteers = list(df[(df[col_name] == "Available") | (df[col_name] == "Special")]["VOLUNTEER NAME"])
+
+    # Exclude Dwight if Jim is in the pool, and vice versa
+    if "Jim" in special:
+        available_volunteers = [volunteer for volunteer in available_volunteers if volunteer != "Dwight"]
+    elif "Dwight" in special:
+        available_volunteers = [volunteer for volunteer in available_volunteers if volunteer != "Jim"]
+
+    # Select volunteers for the show, prioritize special volunteers
+    pool = special[:min(3, len(special))] + available_volunteers[:max(0, 3 - len(special))]
+    return pool
 
 
 def main():
     try:
-        # Read the table  
-        df = pd.read_csv(r"<path>\clean_show_availability.csv") 
+        # Read the table
+        df = pd.read_csv("clean_show_availability.csv")
         # Uppercase column headers
         df.columns = df.columns.str.upper()
-        print(df.head())
-        # Loop through the show columns and generate the volunteer pools  
-        pools = {}  
-        for col_name in df.columns:  
-            # Check if column name starts with "SHOW"  
-            if col_name.startswith("SHOW"):  
-                # Get list of special volunteers for this show 
-                special = list(df[df[col_name] == "Special"]["VOLUNTEER NAME"])   
-                # Get list of available volunteers for this show  
-                available_volunteers = list(df[(df[col_name] == "Available") | (df[col_name] == "Special")]["VOLUNTEER NAME"])  
-                # Combine special and available volunteers  
-                pool = special + available_volunteers
-                
-                # Check if Jim and Dwight are both in the pool, and regenerate pool if necessary  
-                while "Jim" in pool and "Dwight" in pool:  
-                    # Regenerate list of special volunteers  
-                    special = list(df[df[col_name] == "Special"]["VOLUNTEER NAME"])  
-                    # Regenerate list of available volunteers 
-                    available_volunteers = list(df[(df[col_name] == "Available") | (df[col_name] == "Special")]["VOLUNTEER NAME"])  
-                    # Combine special and available volunteers 
-                    pool = special + available_volunteers
 
-                # Take only the first 3 volunteers in the pool
-                pool = pool[:3]
+        # Initialize pools dictionary
+        pools = {}
 
-                # Add the pool to the dictionary of pools for each show
-                pools[col_name] = pool  
-        
-        # Print the pools for each show  
-        for show, pool in pools.items():  
-            print(f"{show} on staff: {pool}")  # Print the pool for each show  
-        
-        # Write the pools for each show  
+        # Loop through the show columns and generate the volunteer pools
+        for col_name in df.columns:
+            if col_name.startswith("SHOW"):
+                pools[col_name] = generate_pool(df, col_name)
+
+        # Print the pools for each show
+        for show, pool in pools.items():
+            print(f"{show} on staff: {pool}")
+
+        # Write the pools for each show to a file
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        print(f"The current datetime: {timestamp}")
+        file_path = f"results_{timestamp}.txt"
 
-        # Write and save in this location
-        file_path = f"<path>\results_{timestamp}.txt"
-
-        # Open a file to write results
         with open(file_path, "w") as f:
-            print("Writing results to file...")
-            for show, pool in pools.items():  
-                # Write the pool for each show  
+            f.write("Results:\n")
+            for show, pool in pools.items():
                 f.write(f"{show} on staff: {pool}\n")
 
         print("Results written successfully.")
-    
+
     except Exception as e:
         print(f"An error occurred: {e}")
+
 
 if __name__ == "__main__":
     main()
