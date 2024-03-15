@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # Read the table  
-raw_df = pd.read_csv(r"C:\\Users\\Clair\\OneDrive\\Documents\\Volunteer\\show_availability.csv") 
+raw_df = pd.read_csv(r"<path>\show_availability.csv") 
 
 # Uppercase column headers
 raw_df.columns = raw_df.columns.str.upper()
