@@ -27,12 +27,11 @@ __Timestamp__: It includes the current date and time in the filename of the outp
 
 __File Structure__: The script assumes a specific file structure and file paths for input and output files
 
-Usage:
-Ensure the CSV file containing volunteer availability data is located at the specified path.
-Run the script, and it will generate pools of volunteers for each show and save the results in a text file.
+
 Dependencies:
-pandas: Used for data manipulation and analysis.
-os: Used for file path operations.
-datetime: Used for generating timestamps.
+- pandas: Used for data manipulation and analysis.
+- os: Used for file path operations.
+- datetime: Used for generating timestamps.
+  
 Author:
 Claire Kraft
