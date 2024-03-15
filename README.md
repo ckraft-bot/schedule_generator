@@ -28,7 +28,7 @@ __Timestamp__: It includes the current date and time in the filename of the outp
 __File Structure__: The script assumes a specific file structure and file paths for input and output files
 
 
-Dependencies:
+__Dependencies__:
 - pandas: Used for data manipulation and analysis.
 - os: Used for file path operations.
 - datetime: Used for generating timestamps.
