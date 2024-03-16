@@ -1,0 +1,6 @@
+Results:
+SHOW 1 - KATHLEEN MADIGAN on staff: ['Dwight', 'Toby', 'Angela']
+SHOW 2 - CSO MASTERWORKS on staff: ['Pam', 'Angela', 'Meredith']
+SHOW 3 - MARC BROUSSARD on staff: ['Jim', 'Toby', 'Angela']
+SHOW 4 - STEVE TREVINO on staff: ['Darryl', 'Meredith', 'Michael']
+SHOW 5 - ASHLEY MCBRYDE on staff: ['Angela', 'Creed', 'Jim']
