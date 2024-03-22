@@ -21,7 +21,7 @@ def generate_pool(df, col_name):
 def main():
     try:
         # Reading the CSV file containing volunteer availability
-        df = pd.read_csv(r"C:\Users\Clair\OneDrive\Documents\Volunteer\volunteer_availability_clean.csv")
+        df = pd.read_csv("season3_episode17/volunteer_availability_clean.csv")
         df.columns = df.columns.str.upper()
         pools = {}
 
