@@ -1,6 +1,0 @@
-Results:
-SHOW 1 - KATHLEEN MADIGAN on staff: ['Dwight', 'Angela', 'Creed']
-SHOW 2 - CSO MASTERWORKS on staff: ['Pam', 'Angela', 'Meredith']
-SHOW 3 - MARC BROUSSARD on staff: ['Jim', 'Angela', 'Creed']
-SHOW 4 - STEVE TREVINO on staff: ['Meredith', 'Michael', 'Oscar']
-SHOW 5 - ASHLEY MCBRYDE on staff: ['Angela', 'Creed', 'Jim']
