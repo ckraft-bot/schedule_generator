@@ -1,0 +1,7 @@
+Results:
+SHOW 1 - SKETCHING (YONKERS) on staff: [Dwight Schrute, Pam Beesly, Andy Bernard]
+SHOW 2 - PHOTOGRAPHY (SCRANTON) on staff: [Erin Hannon, Pam Beesly, Andy Bernard]
+SHOW 3 - WATERCOLOR (SCRANTON) on staff: [Angela Martin, Michael Scott, Andy Bernard]
+SHOW 4 - MOSAIC (SCRANTON) on staff: [Jim Halpert, Oscar Martinez, Phyllis Vance]
+SHOW 5 - CERAMICS (YONKERS) on staff: [Dwight Schrute, Kelly Kapoor, Meredith Palmer]
+SHOW 7 - GLASS (SCRANTON) on staff: [Gabe Lewis, Angela Martin, Creed Bratton]
