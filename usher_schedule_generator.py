@@ -1,62 +1,65 @@
 import pandas as pd
 import os
 import datetime
-
-"""
-Excludes "Jim" and "Dwight" from being selected together for the same show.
-Prioritizes selecting "Special" volunteers first for each show.
-Writes the results to a text file with a timestamp in the filename.
-Removed unnecessary imports and variables.
-"""
+import re
+import random
 
 def generate_pool(df, col_name):
-    special = list(df[df[col_name] == "Special"]["VOLUNTEER NAME"])
-    available_volunteers = list(df[(df[col_name] == "Available") | (df[col_name] == "Special")]["VOLUNTEER NAME"])
+    # Extracting special volunteers and available volunteers - excluding humans A and B from the pool as they are not ushers
+    special = list(df[(df[col_name] == "Special") & (~df["USHER NAME"].isin(["Human A", "Human B"]))]["USHER NAME"])
+    available = list(df[(df[col_name] == "Available") & (~df["USHER NAME"].isin(["Human A", "Human B"]))]["USHER NAME"])
 
-    # Exclude Dwight if Jim is in the pool, and vice versa
-    if "Jim" in special:
-        available_volunteers = [volunteer for volunteer in available_volunteers if volunteer != "Dwight"]
-    elif "Dwight" in special:
-        available_volunteers = [volunteer for volunteer in available_volunteers if volunteer != "Jim"]
+    # Define pool size based on header
+    if "VENUE A" in col_name.upper():
+        pool_size = 7
+    elif "VENUE B" in col_name.upper():
+        pool_size = 25
+    else:
+        # the difference between the small and big theatre/venue
+        pool_size = 18 
 
-    # Select volunteers for the show, prioritize special volunteers
-    pool = special[:min(3, len(special))] + available_volunteers[:max(0, 3 - len(special))]
+    # Initialize the pool with special volunteers
+    pool = special[:min(pool_size, len(special))]
+    
+    # Determine the number of available volunteers needed to fill the remaining spots
+    remaining_spots = pool_size - len(pool)
+    
+    # Shuffle the available volunteers list
+    random.shuffle(available)
+    
+    # Add available volunteers to the pool to fill the remaining spots
+    pool.extend(available[:remaining_spots])
+    
     return pool
-
 
 def main():
     try:
-        # Read the table
-        df = pd.read_csv("clean_show_availability.csv")
-        # Uppercase column headers
+        # Reading the CSV file containing volunteer availability
+        df = pd.read_csv(r"<path>data_clean.csv")
         df.columns = df.columns.str.upper()
-
-        # Initialize pools dictionary
         pools = {}
 
-        # Loop through the show columns and generate the volunteer pools
+        # Generating pools for each column starting with "SHOW"
         for col_name in df.columns:
             if col_name.startswith("SHOW"):
                 pools[col_name] = generate_pool(df, col_name)
 
-        # Print the pools for each show
-        for show, pool in pools.items():
-            print(f"{show} on staff: {pool}")
-
-        # Write the pools for each show to a file
+        # Generating timestamp for the filename
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         file_path = f"results_{timestamp}.txt"
 
+        # Writing the modified data to the file
         with open(file_path, "w") as f:
             f.write("Results:\n")
             for show, pool in pools.items():
-                f.write(f"{show} on staff: {pool}\n")
+                # Removing square brackets and single quotes around the names using regex
+                pool = ", ".join([re.sub(r"'([^']*)'", r"\1", name) for name in pool])
+                f.write(f"{show} on staff: [{pool}]\n")
 
         print("Results written successfully.")
 
     except Exception as e:
         print(f"An error occurred: {e}")
-
 
 if __name__ == "__main__":
     main()
