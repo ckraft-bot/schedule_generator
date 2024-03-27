@@ -33,6 +33,7 @@ __Dependencies__:
 - pandas: Used for data manipulation and analysis.
 - os: Used for file path operations.
 - datetime: Used for generating timestamps.
+- random: Ushed to randomly select items in lists.
   
 Author:
 Claire Kraft
