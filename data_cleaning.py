@@ -20,8 +20,6 @@ latest_rows = raw_df.loc[latest_indices]
 clean_df = latest_rows.to_csv(r"<path>\data_clean.csv", index=False)
 print("Latest rows for each volunteer saved successfully.")
 
-import pandas as pd
-
 # Comparing row counts
 # raw_df_row = len(raw_df)
 # clean_df_row_count = len(clean_df)
