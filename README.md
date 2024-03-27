@@ -1,19 +1,19 @@
 # schedule_generator
 # Summary:
-The provided Python script is designed to organize volunteers for various shows based on their availability status. Here's a breakdown of its functionality:
+The provided Python script is designed to organize ushers for various shows based on their availability status. Here's a breakdown of its functionality:
 
-__Reading Data__: The script reads a CSV file containing volunteer availability data from a specified location.
+__Reading Data__: The script reads a CSV file containing usher availability data from a specified location.
 
-__Data Preprocessing__: It converts the column headers to uppercase for consistency. It takes the latest submission by each volunteer. 
+__Data Preprocessing__: It converts the column headers to uppercase for consistency. It takes the latest submission by each usher. 
 
-__Generating Volunteer Pools__:
+__Generating Usher Pools__:
 
 The script loops through the columns of the DataFrame, checking if the column name starts with "SHOW".
 For each show column:
-- It extracts a list of special volunteers and available volunteers based on their status ("Special" or "Available").
-- It combines special and available volunteers into a pool.
-- It checks If both "Person A" and "Person B" are in the pool, it regenerates the pool to ensure they are not together.
-- Finally, it limits the pool to only the first three volunteers.
+- It extracts a list of special ushers and available ushers based on their status ("Special" or "Available").
+- It combines special and available ushers into a pool.
+- It excludes "Person A" and "Person B" as they are not ushers.
+- Finally, it limits the pool based on the venue the show is at.
 
 __Output Generation__:
 
