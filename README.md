@@ -11,9 +11,10 @@ __Generating Usher Pools__:
 The script loops through the columns of the DataFrame, checking if the column name starts with "SHOW".
 For each show column:
 - It extracts a list of special ushers and available ushers based on their status ("Special" or "Available").
-- It combines special and available ushers into a pool.
+- Prioritizes the special usher guarateeing them the slot for the show.
+- It combines special and available ushers into a pool. Then the pool randomly selects ushers for the show.
 - It excludes "Person A" and "Person B" as they are not ushers.
-- Finally, it limits the pool based on the venue the show is at.
+- Finally, it limits the pool based on the venue the show is at. One venue may need up to 25 and the other venue only needs at max 7.
 
 __Output Generation__:
 
