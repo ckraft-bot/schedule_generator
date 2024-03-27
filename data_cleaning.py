@@ -17,7 +17,7 @@ latest_indices = raw_df.groupby('USHER NAME')['TIMESTAMP'].idxmax()
 latest_rows = raw_df.loc[latest_indices]
 
 # Write the latest rows to a new CSV file
-clean_df = latest_rows.to_csv(r"C:\Users\Clair\OneDrive\Documents\Volunteer\Tivoli\Data\Apr_1_15_clean.csv", index=False)
+clean_df = latest_rows.to_csv(r"<path>\data_clean.csv", index=False)
 print("Latest rows for each volunteer saved successfully.")
 
 import pandas as pd
